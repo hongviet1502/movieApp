@@ -106,7 +106,8 @@ dependencies {
 
     // Coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-//    implementation("org.jetbrains.kotlin:kotlin-metadata-jvm:1.9.22")
+
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
 
 }
 
