@@ -1,6 +1,7 @@
 package com.example.muv.ui.base
 
 import android.content.Context
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
@@ -8,7 +9,9 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
@@ -16,24 +19,22 @@ import com.example.muv.R
 import com.example.muv.data.model.Resource
 import com.example.muv.ui.components.LoadingDialog
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
 
-    // Abstract properties that must be implemented by child activities
     abstract val layoutId: Int
     abstract val viewModelClass: Class<VM>
 
-    // DataBinding and ViewModel instances
     protected lateinit var binding: DB
     protected lateinit var viewModel: VM
 
-    // Loading dialog or progress indicator
     private var loadingDialog: LoadingDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Setup Netflix-like UI
+        setupNetflixUI()
 
         // Initialize DataBinding
         binding = DataBindingUtil.setContentView(this, layoutId)
@@ -42,58 +43,79 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompa
         // Initialize ViewModel
         viewModel = ViewModelProvider(this)[viewModelClass]
 
-        // Setup common observers
         setupBaseObservers()
-
-        // Setup toolbar if needed
         setupToolbar()
 
-        // Initialize child-specific setup
         initView()
         initData()
         initListener()
     }
 
     /**
-     * Setup common observers for all activities
+     * Setup Netflix-like UI - Dark theme, fullscreen
      */
+    private fun setupNetflixUI() {
+        // Enable edge-to-edge display
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        // Set status bar color
+        window.statusBarColor = Color.TRANSPARENT
+        window.navigationBarColor = Color.TRANSPARENT
+
+        // Setup system UI controller
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.isAppearanceLightStatusBars = false
+        controller.isAppearanceLightNavigationBars = false
+    }
+
+    /**
+     * Show/Hide system bars for immersive experience (for video playback)
+     */
+    protected fun toggleSystemBars(hide: Boolean) {
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        if (hide) {
+            controller.hide(WindowInsetsCompat.Type.systemBars())
+            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        } else {
+            controller.show(WindowInsetsCompat.Type.systemBars())
+        }
+    }
+
     private fun setupBaseObservers() {
-        // Observe loading state
         viewModel.loading.observe(this) { isLoading ->
             handleLoadingState(isLoading)
         }
 
-        // Observe error messages
         viewModel.error.observe(this) { errorMessage ->
             handleError(errorMessage)
         }
 
-        // Observe network status
         viewModel.networkError.observe(this) { isNetworkError ->
             if (isNetworkError) {
                 showNetworkError()
             }
         }
 
-        // Observe success messages
         viewModel.message.observe(this) { message ->
             showMessage(message)
         }
     }
 
-    /**
-     * Setup toolbar with common configurations
-     */
     private fun setupToolbar() {
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
+        // Netflix usually doesn't show back button on main screens
+        if (shouldShowBackButton()) {
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                setDisplayShowHomeEnabled(true)
+            }
         }
     }
 
     /**
-     * Handle loading state - show/hide loading indicator
+     * Override this to control back button visibility
      */
+    protected open fun shouldShowBackButton(): Boolean = true
+
     protected open fun handleLoadingState(isLoading: Boolean) {
         if (isLoading) {
             showLoading()
@@ -102,35 +124,25 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompa
         }
     }
 
-    /**
-     * Show loading dialog
-     */
     private fun showLoading() {
         if (loadingDialog == null) {
             loadingDialog = LoadingDialog()
         }
-        loadingDialog?.show(supportFragmentManager, "LoadingDialog")
+        if (!loadingDialog!!.isAdded) {
+            loadingDialog?.show(supportFragmentManager, "LoadingDialog")
+        }
     }
 
-    /**
-     * Hide loading dialog
-     */
     private fun hideLoading() {
         loadingDialog?.dismiss()
     }
 
-    /**
-     * Handle error messages
-     */
     protected open fun handleError(errorMessage: String?) {
         errorMessage?.let {
             showErrorSnackbar(it)
         }
     }
 
-    /**
-     * Show error message using Snackbar
-     */
     private fun showErrorSnackbar(message: String) {
         Snackbar.make(
             findViewById(android.R.id.content),
@@ -140,31 +152,25 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompa
             setAction("retry") {
                 onRetryClicked()
             }
+            setBackgroundTint(getColor(R.color.netflix_red))
+            setTextColor(Color.WHITE)
+            setActionTextColor(Color.WHITE)
             show()
         }
     }
 
-    /**
-     * Show network error with specific handling
-     */
     private fun showNetworkError() {
         if (!isNetworkAvailable()) {
             showErrorSnackbar("error_network")
         }
     }
 
-    /**
-     * Show success/info messages
-     */
     protected fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    /**
-     * Check network availability
-     */
     protected fun isNetworkAvailable(): Boolean {
-        val connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
         val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
 
@@ -176,9 +182,6 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompa
         }
     }
 
-    /**
-     * Handle Resource state from Repository
-     */
     protected fun <T> handleResource(resource: Resource<T>, onSuccess: (T) -> Unit) {
         when (resource) {
             is Resource.Loading -> {
@@ -195,36 +198,17 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompa
         }
     }
 
-    /**
-     * Handle back navigation
-     */
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
 
-    /**
-     * Called when retry button is clicked
-     */
     protected open fun onRetryClicked() {
         // Override in child activities if needed
     }
 
-    // Abstract methods that must be implemented by child activities
-
-    /**
-     * Initialize views and setup UI components
-     */
     abstract fun initView()
-
-    /**
-     * Initialize data and setup observers
-     */
     abstract fun initData()
-
-    /**
-     * Setup click listeners and other interactions
-     */
     abstract fun initListener()
 
     override fun onDestroy() {

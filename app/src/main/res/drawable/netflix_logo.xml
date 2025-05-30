@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="32dp"
+    android:viewportWidth="100"
+    android:viewportHeight="32">
+
+    <!-- Netflix "N" -->
+    <path android:fillColor="@color/netflix_red"
+        android:pathData="M5,2 L15,2 L15,30 L10,30 L10,15 L8,15 L8,30 L3,30 L3,2 Z" />
+
+    <!-- Netflix text simulation -->
+    <path android:fillColor="@color/netflix_red"
+        android:pathData="M20,8 L32,8 L32,12 L25,12 L25,15 L31,15 L31,19 L25,19 L25,22 L32,22 L32,26 L20,26 Z" />
+
+    <path android:fillColor="@color/netflix_red"
+        android:pathData="M35,8 L45,8 L45,12 L40,12 L40,26 L35,26 Z" />
+
+    <path android:fillColor="@color/netflix_red"
+        android:pathData="M48,8 L53,8 L53,22 L58,22 L58,26 L48,26 Z" />
+</vector>

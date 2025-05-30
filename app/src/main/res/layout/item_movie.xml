@@ -54,7 +54,7 @@
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
-                        android:src="@drawable/ic_star"
+                        android:src="@drawable/ic_home"
                         app:tint="@color/rating_star_color"
                         android:layout_marginEnd="4dp" />
 

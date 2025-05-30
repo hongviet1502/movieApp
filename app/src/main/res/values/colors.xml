@@ -1,46 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors -->
-    <color name="primary_color">
-        #1976D2</color>
-    <color name="primary_dark_color">
-        #0D47A1</color>
-    <color name="accent_color">
-        #FF5722</color>
+    <!-- Netflix Brand Colors -->
+    <color name="netflix_red">#E50914</color>
+    <color name="netflix_dark_red">#B30710</color>
+    <color name="netflix_black">#000000</color>
+    <color name="netflix_dark_gray">#141414</color>
+    <color name="netflix_medium_gray">#2F2F2F</color>
+    <color name="netflix_light_gray">#B3B3B3</color>
+    <color name="netflix_yellow">#FFD700</color>
+    <color name="netflix_dark_yellow">#DAA520</color>
 
-    <!-- Background Colors -->
-    <color name="background_color">
-        #F5F5F5</color>
-    <color name="card_background">
-        #FFFFFF</color>
-    <color name="placeholder_color">
-        #E0E0E0</color>
+    <!-- Transparent colors -->
+    <color name="netflix_red_transparent">#33E50914</color>
+    <color name="netflix_red_ripple">#1AE50914</color>
+    <color name="netflix_black_transparent">#CC000000</color>
+    <color name="white_ripple">#1AFFFFFF</color>
 
-    <!-- Text Colors -->
-    <color name="text_primary">
-        #212121</color>
-    <color name="text_secondary">
-        #757575</color>
-    <color name="text_hint">
-        #BDBDBD</color>
+    <!-- Background colors -->
+    <color name="background_primary">@color/netflix_black</color>
+    <color name="background_secondary">@color/netflix_dark_gray</color>
+    <color name="card_background">#2F2F2F</color>
+    <color name="placeholder_color">#404040</color>
 
-    <!-- Rating Colors -->
-    <color name="rating_star_color">
-        #FFC107</color>
-    <color name="rating_background">#33000000</color>
+    <!-- Text colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B3B3B3</color>
+    <color name="text_tertiary">#808080</color>
 
-    <!-- System Colors -->
-    <color name="white">
-        #FFFFFF</color>
-    <color name="black">
-        #000000</color>
-    <color name="transparent">#00000000</color>
+    <!-- Status colors -->
+    <color name="success_color">#4CAF50</color>
+    <color name="error_color">#F44336</color>
+    <color name="warning_color">#FF9800</color>
 
-    <!-- Status Colors -->
-    <color name="success_color">
-        #4CAF50</color>
-    <color name="error_color">
-        #F44336</color>
-    <color name="warning_color">
-        #FF9800</color>
+    <!-- Bottom Nav Colors -->
+    <color name="bottom_nav_background">#1A1A1A</color>
+    <color name="bottom_nav_selected">#E50914</color>
+    <color name="bottom_nav_unselected">#808080</color>
 </resources>

@@ -36,6 +36,6 @@ class MovieApplication : Application() {
         // Có thể thêm Timber hoặc logging khác
         // Timber.plant(Timber.DebugTree())
         // Debug configuration
-        android.util.Log.d("MovieApp", "Debug mode enabled")
+        Log.d("MovieApp", "Debug mode enabled")
     }
 }

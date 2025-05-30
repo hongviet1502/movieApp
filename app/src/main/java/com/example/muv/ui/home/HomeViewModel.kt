@@ -39,14 +39,14 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             movieRepository.getPopularMovies(1).collect { resource ->
                 when (resource) {
-                    is Resource.Loading -> setLoading(true)
+                    is Resource.Loading -> showLoading()
                     is Resource.Success -> {
-                        setLoading(false)
+                        hideLoading()
                         _popularMovies.value = resource.data ?: emptyList()
                     }
                     is Resource.Error -> {
-                        setLoading(false)
-                        setError(resource.message ?: "Lỗi không xác định")
+                        hideLoading()
+                        showError(resource.message ?: "Lỗi không xác định")
                     }
                 }
             }
@@ -61,7 +61,7 @@ class HomeViewModel @Inject constructor(
                         _topRatedMovies.value = resource.data ?: emptyList()
                     }
                     is Resource.Error -> {
-                        setError(resource.message ?: "Lỗi tải phim đánh giá cao")
+                        showError(resource.message ?: "Lỗi tải phim đánh giá cao")
                     }
                     else -> {}
                 }
@@ -77,7 +77,7 @@ class HomeViewModel @Inject constructor(
                         _nowPlayingMovies.value = resource.data ?: emptyList()
                     }
                     is Resource.Error -> {
-                        setError(resource.message ?: "Lỗi tải phim đang chiếu")
+                        showError(resource.message ?: "Lỗi tải phim đang chiếu")
                     }
                     else -> {}
                 }

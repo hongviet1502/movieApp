@@ -1,3 +1,37 @@
 <resources>
-    <string name="app_name">Mu V</string>
+    <string name="app_name">Netflix Clone</string>
+
+    <!-- Bottom Navigation -->
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="downloads">Downloads</string>
+    <string name="more">More</string>
+
+    <!-- Home Screen -->
+    <string name="netflix_logo">Netflix Logo</string>
+    <string name="profile">Profile</string>
+    <string name="my_list">My List</string>
+    <string name="play">Play</string>
+    <string name="featured_movie">Featured Movie</string>
+    <string name="movie_logo">Movie Logo</string>
+    <string name="movie_poster">Movie Poster</string>
+
+    <!-- Movie Categories -->
+    <string name="trending_now">Trending Now</string>
+    <string name="popular_movies">Popular on Netflix</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="new_releases">New Releases</string>
+    <string name="continue_watching">Continue Watching</string>
+
+    <!-- Sample content -->
+    <string name="featured_movie_description">An epic adventure that will take you to the edge of the universe and beyond. Experience the thrill of a lifetime.</string>
+
+    <!-- Common actions -->
+    <string name="retry">Retry</string>
+    <string name="loading">Loading...</string>
+    <string name="error_network">No internet connection</string>
+    <string name="error_generic">Something went wrong</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_detail">DetailActivity</string>
 </resources>

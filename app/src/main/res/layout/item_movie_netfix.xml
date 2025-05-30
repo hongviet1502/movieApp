@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/movie_item_width"
+    android:layout_height="@dimen/movie_item_height"
+    android:layout_marginEnd="@dimen/spacing_small"
+    app:cardCornerRadius="@dimen/corner_radius_medium"
+    app:cardElevation="@dimen/elevation_small"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivMoviePoster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_movie"
+            android:contentDescription="@string/movie_poster" />
+
+        <!-- Gradient overlay for better text readability -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_overlay_bottom" />
+
+        <!-- Movie info overlay -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/tvMovieTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Movie Title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size_tiny"
+                    android:layout_height="@dimen/icon_size_tiny"
+                    android:src="@drawable/ic_star"
+                    app:tint="@color/netflix_yellow" />
+
+                <TextView
+                    android:id="@+id/tvMovieRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_tiny"
+                    android:text="8.5"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_tiny" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Play button overlay (shows on hover/focus) -->
+        <ImageButton
+            android:id="@+id/btnPlayOverlay"
+            android:layout_width="@dimen/icon_size_large"
+            android:layout_height="@dimen/icon_size_large"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_play_button"
+            android:src="@drawable/ic_play"
+            android:visibility="gone"
+            android:contentDescription="@string/play"
+            app:tint="@color/white" />
+
+    </FrameLayout>
+
+</androidx.cardview.widget.CardView>
