@@ -20,7 +20,8 @@ data class Movie(
     @SerializedName("vote_count")
     val voteCount: Int,
     @SerializedName("genre_ids")
-    val genreIds: List<Int> = emptyList()
+    val genreIds: List<Int> = emptyList(),
+    var isFavorite: Boolean = false
 ) : Parcelable {
     val posterUrl: String
         get() = "https://image.tmdb.org/t/p/w500$posterPath"

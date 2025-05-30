@@ -3,7 +3,7 @@ package com.example.muv
 class BuildConfig {
     companion object {
         // API Configuration
-        const val API_KEY = "your_tmdb_api_key_here"
+        const val API_KEY = "6e5ba5494616e3ceba919a2aee55a4fe"
         const val BASE_URL = "https://api.themoviedb.org/3/"
         const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
 

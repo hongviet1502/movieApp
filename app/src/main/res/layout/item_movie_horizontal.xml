@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="140dp"
+    android:layout_height="200dp"
+    android:layout_marginEnd="12dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Movie Poster -->
+        <ImageView
+            android:id="@+id/moviePosterImageView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Movie Poster"
+            app:layout_constraintBottom_toTopOf="@id/movieInfoContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <!-- Movie Info Container -->
+        <LinearLayout
+            android:id="@+id/movieInfoContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/netflix_dark_gray"
+            android:orientation="vertical"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- Movie Title -->
+            <TextView
+                android:id="@+id/movieTitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Movie Title"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="Avengers: Endgame" />
+
+            <!-- Movie Rating -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/ic_star"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="Rating" />
+
+                <TextView
+                    android:id="@+id/movieRatingTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8.4"
+                    android:textColor="@color/netflix_light_gray"
+                    android:textSize="10sp"
+                    tools:text="8.4" />
+
+                <!-- Release Year -->
+                <TextView
+                    android:id="@+id/movieYearTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2019"
+                    android:textColor="@color/netflix_light_gray"
+                    android:textSize="10sp"
+                    android:gravity="end"
+                    tools:text="2019" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Favorite Button -->
+        <ImageView
+            android:id="@+id/favoriteImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_favorite_border"
+            android:background="@drawable/circle_background"
+            android:padding="4dp"
+            android:layout_margin="8dp"
+            android:contentDescription="Add to Favorites"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

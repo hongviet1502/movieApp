@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "714730302015",
+    "project_id": "muvapp-c50b7",
+    "storage_bucket": "muvapp-c50b7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714730302015:android:b74de8048663d363b9268a",
+        "android_client_info": {
+          "package_name": "com.example.muv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgD8Ah6tPrHU_MB3x5vlSDsH6iDCITRSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
