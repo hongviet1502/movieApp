@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="60"
+    android:viewportHeight="60">
+
+    <path
+        android:fillColor="@color/netflix_light_gray"
+        android:pathData="M30,30c4.14,0 7.5,-3.36 7.5,-7.5S34.14,15 30,15s-7.5,3.36 -7.5,7.5S25.86,30 30,30zm0,3.75c-5,0 -15,2.51 -15,7.5v3.75h30v-3.75c0,-4.99 -10,-7.5 -15,-7.5z"/>
+</vector>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="160dp"
+    android:height="90dp"
+    android:viewportWidth="160"
+    android:viewportHeight="90">
+
+    <!-- Play triangle -->
+    <path
+        android:fillColor="@color/netflix_dark_gray"
+        android:pathData="M75,35 L75,55 L90,45 Z" />
+
+</vector>

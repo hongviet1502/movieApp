@@ -2,7 +2,7 @@ package com.example.muv.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.muv.data.local.dao.MovieDao
+import com.example.muv.data.local.dao.FavoriteMovieDao
 import com.example.muv.data.local.database.MovieDatabase
 import dagger.Module
 import dagger.Provides
@@ -26,7 +26,7 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideMovieDao(database: MovieDatabase): MovieDao {
-        return database.movieDao()
+    fun provideMovieDao(database: MovieDatabase): FavoriteMovieDao {
+        return database.favoriteMovieDao()
     }
 }

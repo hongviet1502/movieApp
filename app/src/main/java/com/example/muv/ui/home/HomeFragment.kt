@@ -149,7 +149,7 @@ class HomeFragment : Fragment() {
 
         // Retry button
         binding.retryButton.setOnClickListener {
-//            viewModel.retryLoadMovies()
+            viewModel.loadAllMovies()
         }
 
         // Pull to refresh (if you want to add SwipeRefreshLayout)
@@ -175,12 +175,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun onMovieClick(movie: Movie) {
-        // Navigate to movie detail
-        // You can use Navigation Component here
         showSnackbar("Clicked on: ${movie.title}")
-
-        // Example navigation:
-        NavigationManager.navigateToMovieDetail(requireActivity(), movie)
+        val moviePoster = binding.featuredMovieCard // Or get the clicked poster view
+        NavigationManager.navigateToMovieDetail(
+            requireActivity(),
+            movie,
+            moviePoster // For shared element transition
+        )
     }
 
     private fun playMovie(movie: Movie) {

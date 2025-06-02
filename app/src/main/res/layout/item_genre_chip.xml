@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:text="Action"
+    android:textColor="@color/white"
+    android:textSize="12sp"
+    app:chipBackgroundColor="@color/netflix_dark_gray"
+    app:chipCornerRadius="16dp"
+    app:chipStrokeColor="@color/netflix_red"
+    app:chipStrokeWidth="1dp"
+    tools:text="Action" />

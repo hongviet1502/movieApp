@@ -8,26 +8,38 @@ import kotlinx.parcelize.Parcelize
 data class MovieDetail(
     val id: Int,
     val title: String,
+    val originalTitle: String,
     val overview: String,
-    @SerializedName("poster_path")
     val posterPath: String?,
-    @SerializedName("backdrop_path")
     val backdropPath: String?,
-    @SerializedName("release_date")
-    val releaseDate: String,
-    @SerializedName("vote_average")
-    val voteAverage: Double,
-    @SerializedName("vote_count")
-    val voteCount: Int,
+    val releaseDate: String?,
     val runtime: Int?,
+    val voteAverage: Double,
+    val voteCount: Int,
+    val popularity: Double,
+    val adult: Boolean,
     val genres: List<Genre>,
-    val tagline: String?
+    val productionCompanies: List<ProductionCompany>,
+    val productionCountries: List<ProductionCountry>,
+    val spokenLanguages: List<SpokenLanguage>,
+    val status: String,
+    val tagline: String?,
+    val budget: Long,
+    val revenue: Long,
+    val homepage: String?
 ) : Parcelable {
+
     val posterUrl: String
-        get() = "https://image.tmdb.org/t/p/w500$posterPath"
+        get() = "https://image.tmdb.org/t/p/w500${posterPath}"
 
     val backdropUrl: String
-        get() = "https://image.tmdb.org/t/p/w500$backdropPath"
+        get() = "https://image.tmdb.org/t/p/w1280${backdropPath}"
+
+    val releaseYear: String
+        get() = releaseDate?.substring(0, 4) ?: "Unknown"
+
+    val formattedRuntime: String
+        get() = runtime?.let { "${it} min" } ?: "Unknown"
 
     val genreNames: String
         get() = genres.joinToString(", ") { it.name }
