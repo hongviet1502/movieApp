@@ -14,6 +14,7 @@ data class FavoriteMovieEntity(
     val releaseDate: String?,
     val voteAverage: Double,
     val voteCount: Int,
+    val popularity: Double,
     val genreIds: String, // Comma-separated string
     val addedAt: Long = System.currentTimeMillis()
 )

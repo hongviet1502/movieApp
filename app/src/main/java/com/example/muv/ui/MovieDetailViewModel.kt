@@ -198,7 +198,8 @@ class MovieDetailViewModel @Inject constructor(
                         releaseDate = movie.releaseDate.toString(),
                         voteAverage = movie.voteAverage,
                         voteCount = movie.voteCount,
-                        genreIds = movie.genres.map { it.id }
+                        genreIds = movie.genres.map { it.id },
+                        popularity = movie.popularity,
                     )
                     movieRepository.addToFavorites(movieToAdd)
                     _isFavorite.value = true

@@ -19,6 +19,8 @@ data class Movie(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int,
+    @SerializedName("popularity")
+    val popularity: Double,
     @SerializedName("genre_ids")
     val genreIds: List<Int> = emptyList(),
     var isFavorite: Boolean = false

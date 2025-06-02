@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Netflix Brand Colors -->
+    <color name="netflix_white">#FFFFFF</color>
     <color name="netflix_red">#E50914</color>
     <color name="netflix_dark_red">#B30710</color>
     <color name="netflix_black">#000000</color>

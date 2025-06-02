@@ -225,7 +225,8 @@ class MovieRepositoryImpl @Inject constructor(
                 voteAverage = movie.voteAverage,
                 voteCount = movie.voteCount,
                 genreIds = movie.genreIds.joinToString(","),
-                addedAt = System.currentTimeMillis()
+                addedAt = System.currentTimeMillis(),
+                popularity = movie.popularity
             )
             favoriteMovieDao.insertFavorite(favoriteEntity)
         } catch (e: Exception) {
@@ -256,7 +257,8 @@ class MovieRepositoryImpl @Inject constructor(
                     voteAverage = entity.voteAverage,
                     voteCount = entity.voteCount,
                     genreIds = entity.genreIds.split(",").mapNotNull { it.toIntOrNull() },
-                    isFavorite = true
+                    isFavorite = true,
+                    popularity = entity.popularity
                 )
             }
             emit(Resource.Success(movies))
