@@ -1,10 +1,378 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.VideoPlayerActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="playerViewModel"
+            type="com.example.muv.ui.VideoPlayerViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/netflix_black"
+        android:keepScreenOn="true">
+
+        <!-- YouTube Player View -->
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtubePlayerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:enableAutomaticInitialization="false" />
+
+        <!-- Custom Controls Overlay -->
+        <LinearLayout
+            android:id="@+id/controlsOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/video_controls_gradient"
+            android:visibility="visible">
+
+            <!-- Top Controls -->
+            <LinearLayout
+                android:id="@+id/topControls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:background="@drawable/top_gradient">
+
+                <!-- Back Button -->
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Back"
+                    android:layout_marginEnd="8dp" />
+
+                <!-- Video Title -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/videoTitleTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{playerViewModel.videoTitle}"
+                        android:textColor="@color/netflix_white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="Avengers: Endgame - Official Trailer" />
+
+                    <TextView
+                        android:id="@+id/videoTypeTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{playerViewModel.videoType}"
+                        android:textColor="@color/netflix_light_gray"
+                        android:textSize="14sp"
+                        android:maxLines="1"
+                        tools:text="Official Trailer" />
+
+                </LinearLayout>
+
+                <!-- Cast Button -->
+                <ImageButton
+                    android:id="@+id/castButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_cast"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Cast"
+                    android:layout_marginStart="8dp"
+                    android:visibility="gone" />
+
+                <!-- More Options -->
+                <ImageButton
+                    android:id="@+id/moreButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_more_vert"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="More options"
+                    android:layout_marginStart="8dp" />
+
+            </LinearLayout>
+
+            <!-- Center Controls -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- Play/Pause Button (Center) -->
+                <ImageButton
+                    android:id="@+id/playPauseButton"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_play_circle"
+                    android:background="@drawable/play_button_circle_background"
+                    android:contentDescription="Play/Pause"
+                    android:scaleType="centerInside" />
+
+                <!-- Loading Indicator -->
+                <ProgressBar
+                    android:id="@+id/loadingProgressBar"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/netflix_red"
+                    android:visibility="gone" />
+
+                <!-- Replay Button -->
+                <ImageButton
+                    android:id="@+id/replayButton"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_replay"
+                    android:background="@drawable/play_button_circle_background"
+                    android:contentDescription="Replay"
+                    android:visibility="gone" />
+
+                <!-- Skip Controls -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="120dp">
+
+                    <!-- Skip Backward -->
+                    <ImageButton
+                        android:id="@+id/skipBackwardButton"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/ic_replay_10"
+                        android:background="@drawable/skip_button_background"
+                        android:contentDescription="Skip backward 10 seconds"
+                        android:layout_marginEnd="32dp" />
+
+                    <!-- Skip Forward -->
+                    <ImageButton
+                        android:id="@+id/skipForwardButton"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/ic_forward_10"
+                        android:background="@drawable/skip_button_background"
+                        android:contentDescription="Skip forward 10 seconds"
+                        android:layout_marginStart="32dp" />
+
+                </LinearLayout>
+
+                <!-- Error State -->
+                <LinearLayout
+                    android:id="@+id/errorContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:padding="24dp">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/ic_error_video"
+                        android:contentDescription="Error"
+                        android:layout_marginBottom="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Video cannot be played"
+                        android:textColor="@color/netflix_white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/errorMessageTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Please check your internet connection and try again"
+                        android:textColor="@color/netflix_light_gray"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:layout_marginBottom="16dp" />
+
+                    <Button
+                        android:id="@+id/retryButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Retry"
+                        android:textColor="@color/netflix_white"
+                        android:background="@drawable/secondary_button_background"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="12dp" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <!-- Bottom Controls -->
+            <LinearLayout
+                android:id="@+id/bottomControls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/bottom_gradient">
+
+                <!-- Progress Bar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/currentTimeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0:00"
+                        android:textColor="@color/netflix_white"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="8dp"
+                        tools:text="2:30" />
+
+                    <SeekBar
+                        android:id="@+id/progressSeekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:progressTint="@color/netflix_red"
+                        android:thumbTint="@color/netflix_red"
+                        android:progressBackgroundTint="@color/netflix_light_gray"
+                        android:max="100"
+                        android:progress="0" />
+
+                    <TextView
+                        android:id="@+id/totalTimeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0:00"
+                        android:textColor="@color/netflix_white"
+                        android:textSize="12sp"
+                        android:layout_marginStart="8dp"
+                        tools:text="3:45" />
+
+                </LinearLayout>
+
+                <!-- Control Buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <!-- Volume -->
+                    <ImageButton
+                        android:id="@+id/volumeButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_volume_up"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Volume" />
+
+                    <!-- Speed -->
+                    <TextView
+                        android:id="@+id/speedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1x"
+                        android:textColor="@color/netflix_white"
+                        android:textSize="14sp"
+                        android:padding="8dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginStart="16dp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <!-- Quality -->
+                    <TextView
+                        android:id="@+id/qualityButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HD"
+                        android:textColor="@color/netflix_white"
+                        android:textSize="14sp"
+                        android:padding="8dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginEnd="16dp" />
+
+                    <!-- Fullscreen -->
+                    <ImageButton
+                        android:id="@+id/fullscreenButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_fullscreen"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Fullscreen" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Gesture Overlay for double-tap to seek -->
+        <View
+            android:id="@+id/gestureOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent" />
+
+        <!-- Brightness/Volume Overlay -->
+        <LinearLayout
+            android:id="@+id/brightnessVolumeOverlay"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/overlay_background"
+            android:visibility="gone"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/overlayIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_volume_up"
+                android:contentDescription="Volume/Brightness"
+                android:layout_marginBottom="8dp" />
+
+            <ProgressBar
+                android:id="@+id/overlayProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="80dp"
+                android:layout_height="4dp"
+                android:progressTint="@color/netflix_white"
+                android:progressBackgroundTint="@color/netflix_dark_gray"
+                android:max="100"
+                android:progress="50" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</layout>

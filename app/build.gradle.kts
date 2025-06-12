@@ -112,6 +112,7 @@ dependencies {
 
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
 
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.1")
 }
 
 kapt {

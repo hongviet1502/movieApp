@@ -71,9 +71,9 @@ object NavigationManager {
         videoType: String = "Trailer"
     ) {
         val intent = Intent(activity, VideoPlayerActivity::class.java).apply {
-//            putExtra(VideoPlayerActivity.EXTRA_VIDEO_KEY, videoKey)
-//            putExtra(VideoPlayerActivity.EXTRA_MOVIE_TITLE, movieTitle)
-//            putExtra(VideoPlayerActivity.EXTRA_VIDEO_TYPE, videoType)
+            putExtra(VideoPlayerActivity.EXTRA_VIDEO_KEY, videoKey)
+            putExtra(VideoPlayerActivity.EXTRA_VIDEO_TITLE, movieTitle)
+            putExtra(VideoPlayerActivity.EXTRA_VIDEO_TYPE, videoType)
         }
         activity.startActivity(intent)
         activity.overridePendingTransition(

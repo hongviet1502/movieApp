@@ -2,7 +2,6 @@ package com.example.muv.ui
 
 import android.util.Log
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.muv.R
@@ -267,6 +266,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, MovieDetailViewModel>
 
     private fun playFirstTrailer() {
         val trailer = viewModel.videos.value?.firstOrNull { it.isTrailer }
+        Log.i(TAG, "playFirstTrailer: $trailer")
         if (trailer != null) {
             NavigationManager.navigateToVideoPlayer(this, trailer.key, movieTitle, trailer.type)
         } else {
@@ -314,6 +314,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, MovieDetailViewModel>
     }
 
     companion object {
+        const val TAG = "DetailActivity"
         const val EXTRA_MOVIE_ID = "extra_movie_id"
         const val EXTRA_MOVIE_TITLE = "extra_movie_title"
         const val EXTRA_MOVIE_POSTER = "extra_movie_poster"
